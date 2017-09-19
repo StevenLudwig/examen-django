@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{_("Actualizar password")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h1 class="text-center">Actualizar password</h1>
+                {# ========================= Formulario ====================================#}
+                <form action="{% url 'cpass' %}" method="post">{% csrf_token %}
+                    <div>{# --------------- ------------------------------#}
+                        <p>
+                            <span class="required"><strong>Atencion:</strong></span>
+                            <strong>Tus sesiones incluyendo la actual seran cerradas por seguridad para que vuelvas a iniciar sesion con tu nueva contraseña.</strong>
+                        </p>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <hr>
+                    {{ form.as_p() }}
+                    <hr>
+                    <div class="form-submit text-center">
+                        <button type="submit" id="submit" class="btn btn-success btn-sm">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

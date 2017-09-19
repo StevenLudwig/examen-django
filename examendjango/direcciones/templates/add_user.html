@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{_("Crear usuario")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h1 class="text-center">Crear usuario</h1>
+                {# ========================= Formulario ====================================================#}
+                <form id="nuevo" name="frm_nuevo" action="{% url 'cus' %}" method="post">{% csrf_token %}
+                    <hr>
+                    {{ form.as_p()}}
+                    <hr>
+                    <div class="form-submit text-center">
+                        <button type="submit" id="submit" class="btn btn-success btn-sm">Crear</button>
+                    </div>
+                </form>
+            </div>
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

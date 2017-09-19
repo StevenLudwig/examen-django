@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{_("Usuarios")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h1 class="text-center">Usuarios</h1>
+                {% if request.user.is_superuser %}
+                <a class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" href="{% url 'cus' %}">
+                  <i class="material-icons">add</i>
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+            {% if usuarios %}
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
+                    <thead>
+                        <tr>
+                          <th>Usuario</th>
+                          <th>Email</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                        {% if request.user.is_superuser %}
+                          <th width="3px"></th>
+                          <th width="3px"></th>
+                        {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for u in usuarios %}
+                        <tr>
+                            <td>{{u.username}}</td>
+                            <td>{{u.email}}</td>
+                            <td>{{u.first_name}}</td>
+                            <td>{{u.last_name}}</td>
+                            {% if request.user.is_superuser %}
+                            <td>
+                                <form action="{% url 'uus' %}" method="get">
+                                    <input style="display:none;" type="number" name="id" value="{{u.id}}"/>
+                                    <button type="submit" class="btn-sm btn-primary">
+                                        <span class="glyphicon glyphicon-pencil"></>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="{% url 'dus' %}" method="post">{% csrf_token %}
+                                    <input style="display:none;" type="number" name="id" value="{{u.id}}"/>
+                                    <button type="submit" class="btn-sm btn-danger">
+                                        <span class="glyphicon glyphicon-trash"></>
+                                    </button>
+                                </form>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center">No hay usuarios</p>
+            {% endif %}
+            </div>
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}{{_("Actualizar direccion")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h1 class="text-center">Actualizar direccion</h1>
+                {# ========================= Formulario ====================================================#}
+                <form action="{% url 'uadd' %}" method="post">{% csrf_token %}
+                    <input name="id" value="{{id}}" style="display:none;"/>
+                    <hr>
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.user.errors }}
+                        <label for="id_user"><span style="color:red">*</span> Usuario</label>
+                        <div class="inputs">
+                            {{form.user}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        <label for="id_calle"><span style="color:red">*</span> Calle</label>
+                        {{ form.calle.errors }}
+                        <div class="inputs">
+                            {{form.calle}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.num_calle.errors }}
+                        <label for="id_num_calle"><span style="color:red">*</span> Numero de calle</label>
+                        <div class="inputs">
+                            {{form.num_calle}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.num_int.errors }}
+                        <label for="id_num_int"><span style="color:red">*</span> Numero interior</label>
+                        <div class="inputs">
+                            {{form.num_int}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.municipio.errors }}
+                        <label for="id_municipio"><span style="color:red">*</span> Municipio</label>
+                        <div class="inputs">
+                            {{form.municipio}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.colonia.errors }}
+                        <label for="id_colonia"><span style="color:red">*</span> Colonia</label>
+                        <div class="inputs">
+                            {{form.colonia}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.estado.errors }}
+                        <label for="id_estado"><span style="color:red">*</span> Estado</label>
+                        <div class="inputs">
+                            {{form.estado}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+                    <div class="form-group">{# --------------- ------------------------------#}
+                        {{ form.pais.errors }}
+                        <label for="id_pais"><span style="color:red">*</span> Pais</label>
+                        <div class="inputs">
+                            {{form.pais}}
+                        </div>
+                    </div>{# Fin del campo ---------------------------------------------#}
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label>
+                            Campo Obligatorio&nbsp;&nbsp;<span style="color:red">*</span>
+                        </label>
+                    </div>
+
+                    <div class="form-submit text-center">
+                        <button type="submit" id="submit" class="btn btn-success btn-sm">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

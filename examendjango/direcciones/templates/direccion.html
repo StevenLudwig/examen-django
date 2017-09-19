@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{_("Direcciones")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h1 class="text-center">Direcciones</h1>
+                {% if request.user.is_superuser %}
+                <a href="{% url 'cadd' %}" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                  <i class="material-icons">add</i>
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+            {% if direcciones %}
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable">
+                    <thead>
+                        <tr>
+                          <th>usuario</th>
+                          <th>calle</th>
+                          <th># de calle</th>
+                          <th># interior</th>
+                          <th>municipio</th>
+                          <th>colonia</th>
+                          <th>estado</th>
+                          <th>pais</th>
+                          {% if request.user.is_superuser or request.user.is_staff %}
+                          <th width="3px"></th>
+                          {% endif %}
+                          {% if request.user.is_superuser %}
+                          <th width="3px"></th>
+                          {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for d in direcciones %}
+                        <tr>
+                            <td>{{d.user}}</td>
+                            <td>{{d.calle}}</td>
+                            <td>{{d.num_calle}}</td>
+                            <td>{{d.num_int}}</td>
+                            <td>{{d.municipio}}</td>
+                            <td>{{d.colonia}}</td>
+                            <td>{{d.estado}}</td>
+                            <td>{{d.pais}}</td>
+                            {% if request.user.is_superuser or request.user.is_staff %}
+                            <td>
+                                <form action="{% url 'uadd' %}" method="get">
+                                    <input style="display:none;" type="number" name="id" value="{{d.id}}"/>
+                                    <button type="submit" class="btn-sm btn-primary">
+                                        <span class="glyphicon glyphicon-pencil"></>
+                                    </button>
+                                </form>
+                            </td>
+                            {% endif %}
+                            {% if request.user.is_superuser %}
+                            <td>
+                                <form action="{% url 'dadd' %}" method="post">{% csrf_token %}
+                                    <input style="display:none;" type="number" name="id" value="{{d.id}}"/>
+                                    <button type="submit" class="btn-sm btn-danger">
+                                        <span class="glyphicon glyphicon-trash"></>
+                                    </button>
+                                </form>
+                            </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="text-center">No hay direcciones</p>
+            {% endif %}
+            </div>
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

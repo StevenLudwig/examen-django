@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{_("Inicio")}}{% endblock %}
+
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="block">
+        <div class="container cont">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cont">
+                <h3 class="text-center">
+                    <i class="fa fa-check-circle"></i> Test Django</b>
+                </h3>
+                <p>You need to create a django project to manage admins of our admin panel.</p>
+
+                <p>The objective of the project is to provide the users a means to use the same platform in a restricted manner.
+                Only users with a permission to modify or view data will be able to modify or view it.</p>
+
+                <p>You need to creat 2 db tables:
+                    <ul>
+                        <li>i. Users table: It will contain all the users</li>
+                        <li>ii. Addresses table: It will contain addresses of users</li>
+                    </ul>
+                    The tables are going to have 2 different views in admin panel, one for users and another for addresses
+                </p>
+                <p>You need to create 3 different users:
+                    <ul>
+                        <li>i. Admin user: He is going to have all the accesses to CRUD both the tables</li>
+                        <li>ii. Staff user: He can view both user and adresses views but can only modify addresses.</li>
+                        <li>iii. Customer service user; He can view just the addresses table, but cannot modify anything.</li>
+                    </ul>
+                    <b>PS:</b> There is no need to beautify the project. It should be simple and functional.
+                </p>
+            </div>
+
+        </div> {#!-- /.container --#}
+    </div>
+    {# end content #}
+{% endblock %}

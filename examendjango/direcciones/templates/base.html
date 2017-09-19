@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    {#-- Always force latest IE rendering engine or request Chrome Frame --#}
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="author" content="Steve Ludwig">
+    {#-- SEO --#}<title>Examen | {% block title %}{% endblock %}</title>
+    <meta name="description" content="Consulta de direcciones y usuarios!"/>
+    {#-- ..................................................................................................... --#}
+{% block head %}
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        .cont {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            }
+
+        .mdl-card__title {
+          color: #fff;
+          background-color: black;
+        }
+    </style>
+{% endblock %}
+
+</head>
+<body>
+
+{% block encabezado %}
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                {#!-- Brand and toggle get grouped for better mobile display -->#}
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div>
+                        <a class="navbar-brand" href="/">
+                            <img height="28px" width="auto" src="https://luuna.mx/skin/frontend/luuna/luunera/images/logo_bco@2x.png"/>
+                        </a>
+                    </div>
+                </div>
+
+                {#!-- Collect the nav links, forms, and other content for toggling --#}
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                    {% block menu %}
+                        {% if request.user.is_authenticated %}
+                        <li class="text-center active"><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                        <li class="dropdown text-center">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                {% if request.user.is_superuser %}
+                                <li class="text-center"><a href="/admin/">Admin</a></li>
+                                <li class="text-center active"><a href="{% url 'cpass' %}">Cambiar mi password</a></li>
+                                {% endif %}
+                                {% if request.user.is_superuser or request.user.is_staff %}
+                                <li class="text-center"><a href="/app/usuarios/">Usuarios</a></li>
+                                {% endif %}
+                                <li class="text-center"><a href="/app/direcciones/">Direcciones</a></li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="text-center active"><a href="/accounts/login/">Iniciar sesion</a></li>
+                        {% endif %}
+                    {% endblock menu %}
+                    </ul>
+                </div>{#-- /.navbar-collapse --#}
+            </div>{#-- /.container-fluid --#}
+        </nav>
+    </header>
+    {#--===== End Header =====--#}
+{% endblock encabezado %}
+
+{% block content %}{% endblock %}
+
+
+{% block footer %}
+    {#-- End Footer--#}
+{% endblock %}
+</body>
+</html>
