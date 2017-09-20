@@ -1,5 +1,0 @@
-Django==1.11.5
-django-flat-responsive==2.0
-Jinja2==2.9.6
-jinja2-django-tags==0.5
-psycopg2==2.7.3.1
